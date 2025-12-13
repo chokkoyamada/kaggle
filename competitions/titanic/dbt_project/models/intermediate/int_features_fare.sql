@@ -25,17 +25,26 @@ with base as (
         title_encoded,
         family_size,
         is_alone,
+        family_size_category,
         age_filled,
+        age_is_child,
         age_band
     from {{ ref('int_features_age') }}
 ),
 
--- 運賃の中央値を計算
-fare_stats as (
+-- グローバル中央値とグループ中央値（pclass, embarked）を計算
+fare_stats_global as (
+    select median(fare) as fare_median from base where fare is not null
+),
+
+fare_medians_by_group as (
     select
+        pclass,
+        embarked,
         median(fare) as fare_median
     from base
     where fare is not null
+    group by pclass, embarked
 ),
 
 -- 欠損値を補完
@@ -58,11 +67,20 @@ with_fare_filled as (
         base.title_encoded,
         base.family_size,
         base.is_alone,
+        base.family_size_category,
         base.age_filled,
+        base.age_is_child,
         base.age_band,
-        coalesce(base.fare, fare_stats.fare_median) as fare_filled
+        coalesce(
+            base.fare,
+            fare_medians_by_group.fare_median,
+            fare_stats_global.fare_median
+        ) as fare_filled
     from base
-    cross join fare_stats
+    left join fare_medians_by_group
+        on base.pclass = fare_medians_by_group.pclass
+       and base.embarked = fare_medians_by_group.embarked
+    cross join fare_stats_global
 ),
 
 -- 運賃を4分位数で区間に分割
@@ -86,7 +104,9 @@ with_fare_band as (
         title_encoded,
         family_size,
         is_alone,
+        family_size_category,
         age_filled,
+        age_is_child,
         age_band,
         fare_filled,
         ntile(4) over (order by fare_filled) - 1 as fare_band

@@ -8,6 +8,7 @@ dependencies = [
     "dbt-core>=1.10.15",
     "dbt-duckdb>=1.10.0",
     "kaggle>=1.8.2",
+    "lightgbm>=4.6.0",
     "matplotlib>=3.10.8",
     "numpy>=2.3.5",
     "pandas>=2.3.3",

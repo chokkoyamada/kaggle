@@ -11,7 +11,7 @@ DUCKDB_PATH = PROJECT_ROOT / '../data/titanic.duckdb'
 OUTPUT_DIR = PROJECT_ROOT / '../data/processed'
 
 # 出力ディレクトリを作成
-OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # DuckDBに接続
 conn = duckdb.connect(str(DUCKDB_PATH), read_only=True)

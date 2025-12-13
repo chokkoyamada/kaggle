@@ -48,7 +48,14 @@ with_family_features as (
         cast(sibsp as integer) + cast(parch as integer) + 1 as family_size,
 
         -- 単独者フラグ
-        case when (cast(sibsp as integer) + cast(parch as integer) + 1) = 1 then 1 else 0 end as is_alone
+        case when (cast(sibsp as integer) + cast(parch as integer) + 1) = 1 then 1 else 0 end as is_alone,
+
+        -- 家族サイズのカテゴリ化（逆U字型のパターンを捉える）
+        case
+            when (cast(sibsp as integer) + cast(parch as integer) + 1) = 1 then 0  -- 単独
+            when (cast(sibsp as integer) + cast(parch as integer) + 1) between 2 and 4 then 1  -- 小家族（最適）
+            else 2  -- 大家族
+        end as family_size_category
     from base
 )
 

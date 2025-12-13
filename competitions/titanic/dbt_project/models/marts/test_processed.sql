@@ -22,6 +22,8 @@ select
     is_alone,
     age_band,
     cast(fare_band as integer) as fare_band,
-    has_cabin
+    has_cabin,
+    age_is_child,
+    ticket_group_size
 from features
 order by passenger_id

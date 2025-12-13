@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 import xgboost as xgb
+import lightgbm as lgb
 
 # パス設定
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -29,7 +30,10 @@ test_df = pd.read_csv(DATA_DIR / 'test_processed.csv')
 
 # 特徴量とターゲットに分割
 feature_cols = ['pclass', 'sex_encoded', 'embarked_encoded', 'title_encoded',
-                'family_size', 'is_alone', 'age_band', 'fare_band', 'has_cabin']
+                'family_size', 'is_alone',
+                'age_band', 'fare_band', 'has_cabin',
+                'age_is_child', 'ticket_group_size',
+                'sex_pclass_interaction', 'child_pclass_interaction']
 
 X_train = train_df[feature_cols]
 y_train = train_df['survived']
@@ -48,7 +52,8 @@ models = {
     'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
     'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
     'Gradient Boosting': GradientBoostingClassifier(n_estimators=100, random_state=42),
-    'XGBoost': xgb.XGBClassifier(n_estimators=100, random_state=42, eval_metric='logloss')
+    'XGBoost': xgb.XGBClassifier(n_estimators=100, random_state=42, eval_metric='logloss'),
+    'LightGBM': lgb.LGBMClassifier(n_estimators=100, random_state=42, verbose=-1)
 }
 
 # 各モデルを評価
