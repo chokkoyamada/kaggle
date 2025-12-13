@@ -1,0 +1,157 @@
+version: 2
+
+models:
+  - name: stg_train
+    description: "訓練データ（2013-01-01 ～ 2017-08-15）- 型固定済み"
+    columns:
+      - name: id
+        data_type: bigint
+        description: "レコードID"
+        tests:
+          - not_null
+          - unique
+      - name: date
+        data_type: date
+        description: "日付"
+        tests:
+          - not_null
+      - name: store_nbr
+        data_type: integer
+        description: "店舗番号（1-54）"
+        tests:
+          - not_null
+      - name: family
+        data_type: varchar
+        description: "商品ファミリー（33種類）"
+        tests:
+          - not_null
+      - name: sales
+        data_type: double
+        description: "売上（ターゲット変数）"
+        tests:
+          - not_null
+      - name: onpromotion
+        data_type: integer
+        description: "プロモーション中の商品数"
+        tests:
+          - not_null
+      - name: dataset_type
+        data_type: varchar
+        description: "データセット種別（train/test）"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['train', 'test']
+
+  - name: stg_test
+    description: "テストデータ（2017-08-16 ～ 2017-08-31）- 型固定済み"
+    columns:
+      - name: id
+        data_type: bigint
+        tests:
+          - not_null
+          - unique
+      - name: date
+        data_type: date
+        tests:
+          - not_null
+      - name: store_nbr
+        data_type: integer
+        tests:
+          - not_null
+      - name: family
+        data_type: varchar
+        tests:
+          - not_null
+      - name: sales
+        data_type: double
+        description: "予測ターゲット（NULL）"
+      - name: onpromotion
+        data_type: integer
+        tests:
+          - not_null
+      - name: dataset_type
+        data_type: varchar
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['train', 'test']
+
+  - name: stg_stores
+    description: "店舗マスター（54店舗）- 型固定済み"
+    columns:
+      - name: store_nbr
+        data_type: integer
+        tests:
+          - not_null
+          - unique
+      - name: city
+        data_type: varchar
+        tests:
+          - not_null
+      - name: state
+        data_type: varchar
+        tests:
+          - not_null
+      - name: store_type
+        data_type: varchar
+        tests:
+          - not_null
+      - name: cluster
+        data_type: integer
+        tests:
+          - not_null
+
+  - name: stg_oil
+    description: "石油価格（daily, 3.5%欠損）- 型固定済み"
+    columns:
+      - name: date
+        data_type: date
+        tests:
+          - not_null
+          - unique
+      - name: oil_price
+        data_type: double
+        # 欠損値があるためnot_nullテストは設定しない
+
+  - name: stg_holidays
+    description: "休日・イベント情報 - 型固定済み"
+    columns:
+      - name: date
+        data_type: date
+        tests:
+          - not_null
+      - name: event_type
+        data_type: varchar
+        tests:
+          - not_null
+      - name: locale
+        data_type: varchar
+        tests:
+          - not_null
+      - name: locale_name
+        data_type: varchar
+        tests:
+          - not_null
+      - name: description
+        data_type: varchar
+      - name: transferred
+        data_type: boolean
+        tests:
+          - not_null
+
+  - name: stg_transactions
+    description: "店舗別トランザクション数（daily）- 型固定済み"
+    columns:
+      - name: date
+        data_type: date
+        tests:
+          - not_null
+      - name: store_nbr
+        data_type: integer
+        tests:
+          - not_null
+      - name: transactions
+        data_type: integer
+        tests:
+          - not_null

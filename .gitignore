@@ -33,8 +33,13 @@ data/
 *.csv
 *.zip
 *.tar.gz
-# ただし、dbtのseedsは含める
+# ただし、dbtのseedsは含める（ただし大きなファイルは除外）
 !competitions/*/dbt_project/seeds/*.csv
+# 大きなファイルは除外（GitHubの100MB制限対策）
+competitions/*/dbt_project/seeds/train.csv
+competitions/*/dbt_project/seeds/test.csv
+competitions/*/dbt_project/seeds/transactions.csv
+competitions/*/dbt_project/seeds/sample_submission.csv
 
 # Machine Learning model files
 *.h5

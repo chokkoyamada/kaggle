@@ -1,0 +1,32 @@
+name: 'store_sales'
+version: '1.0.0'
+config-version: 2
+
+profile: 'store_sales'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  store_sales:
+    +schema: raw
+
+models:
+  store_sales:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: main

@@ -33,6 +33,45 @@
 - Kaggle API (v1.8.2)
 - DuckDB + dbt-core (特徴量エンジニアリング管理)
 
+## Kaggle API の使用方法
+
+### kaggle_cli_wrapper.py を使用する
+
+このプロジェクトでは、リポジトリルートにある `kaggle_cli_wrapper.py` を通じてKaggle APIを使用します。
+
+**重要**:
+- リポジトリルートに `.env` ファイルがあり、Kaggle認証情報が設定されています
+- Kaggle APIコマンドは必ず `kaggle_cli_wrapper.py` 経由で実行してください
+
+### よく使うコマンド
+
+```bash
+# リポジトリルートから実行
+
+# コンペティションに提出
+uv run python kaggle_cli_wrapper.py competitions submit \
+  -c <competition-name> \
+  -f <file-path> \
+  -m "<submission message>"
+
+# 例: Store Sales コンペティションに提出
+uv run python kaggle_cli_wrapper.py competitions submit \
+  -c store-sales-time-series-forecasting \
+  -f competitions/store-sales-time-series-forecasting/predictions/submission.csv \
+  -m "LightGBM baseline model"
+
+# データセットをダウンロード
+uv run python kaggle_cli_wrapper.py competitions download -c <competition-name>
+
+# コンペティション情報を取得
+uv run python kaggle_cli_wrapper.py competitions list
+```
+
+### 注意点
+
+1. **必ずリポジトリルートから実行**: `kaggle_cli_wrapper.py` はルートの `.env` ファイルを読み込みます
+2. **直接 kaggle コマンドを使わない**: `kaggle_cli_wrapper.py` を経由することで認証情報が正しく読み込まれます
+
 ## DuckDB + dbt による特徴量エンジニアリング
 
 ### 採用理由
