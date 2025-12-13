@@ -1,0 +1,155 @@
+version: 2
+
+models:
+  - name: stg_train
+    description: >
+      訓練データのステージングモデル。
+      型を明示的に固定し、downstream での型の問題を防ぐ。
+    columns:
+      - name: passenger_id
+        description: 乗客ID
+        data_type: integer
+        tests:
+          - not_null
+          - unique
+
+      - name: survived
+        description: 生存フラグ (0=死亡, 1=生存)
+        data_type: integer
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+
+      - name: pclass
+        description: チケットクラス (1=上級, 2=中級, 3=下級)
+        data_type: integer
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3]
+
+      - name: name
+        description: 乗客の名前
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: sex
+        description: 性別
+        data_type: varchar
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['male', 'female']
+
+      - name: age
+        description: 年齢
+        data_type: double
+        # 欠損値があるので not_null はつけない
+
+      - name: sibsp
+        description: 同乗している兄弟姉妹・配偶者の数
+        data_type: integer
+        tests:
+          - not_null
+
+      - name: parch
+        description: 同乗している親・子供の数
+        data_type: integer
+        tests:
+          - not_null
+
+      - name: ticket
+        description: チケット番号
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: fare
+        description: 運賃
+        data_type: double
+        # 欠損値があるので not_null はつけない
+
+      - name: cabin
+        description: 客室番号
+        data_type: varchar
+        # 欠損値が多いので not_null はつけない
+
+      - name: embarked
+        description: 乗船港 (C=Cherbourg, Q=Queenstown, S=Southampton)
+        data_type: varchar
+        tests:
+          - accepted_values:
+              values: ['C', 'Q', 'S']
+              # nullを許可するため config を追加
+              config:
+                severity: warn
+
+  - name: stg_test
+    description: >
+      テストデータのステージングモデル。
+      型を明示的に固定し、downstream での型の問題を防ぐ。
+    columns:
+      - name: passenger_id
+        description: 乗客ID
+        data_type: integer
+        tests:
+          - not_null
+          - unique
+
+      - name: pclass
+        description: チケットクラス
+        data_type: integer
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3]
+
+      - name: name
+        description: 乗客の名前
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: sex
+        description: 性別
+        data_type: varchar
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['male', 'female']
+
+      - name: age
+        description: 年齢
+        data_type: double
+
+      - name: sibsp
+        description: 同乗している兄弟姉妹・配偶者の数
+        data_type: integer
+        tests:
+          - not_null
+
+      - name: parch
+        description: 同乗している親・子供の数
+        data_type: integer
+        tests:
+          - not_null
+
+      - name: ticket
+        description: チケット番号
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: fare
+        description: 運賃
+        data_type: double
+
+      - name: cabin
+        description: 客室番号
+        data_type: varchar
+
+      - name: embarked
+        description: 乗船港
+        data_type: varchar

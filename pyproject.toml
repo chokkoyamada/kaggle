@@ -5,5 +5,22 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "dbt-core>=1.10.15",
+    "dbt-duckdb>=1.10.0",
     "kaggle>=1.8.2",
+    "matplotlib>=3.10.8",
+    "numpy>=2.3.5",
+    "pandas>=2.3.3",
+    "scikit-learn>=1.8.0",
+    "seaborn>=0.13.2",
+    "xgboost>=3.1.2",
 ]
+
+[tool.uv]
+package = true
+
+[tool.setuptools]
+py-modules = ["kaggle_cli_wrapper"]
+
+[project.scripts]
+kaggle-cli = "kaggle_cli_wrapper:main"

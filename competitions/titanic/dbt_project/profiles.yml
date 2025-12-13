@@ -1,0 +1,7 @@
+titanic:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../data/titanic.duckdb'
+      threads: 4

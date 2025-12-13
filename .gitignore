@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables (IMPORTANT: contains API keys)
+.env
+.env.local
+
+# Kaggle
+kaggle.json
+.kaggle/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data files (often too large for Git)
+data/
+*.csv
+*.zip
+*.tar.gz
+# ただし、dbtのseedsは含める
+!competitions/*/dbt_project/seeds/*.csv
+
+# Machine Learning model files
+*.h5
+*.pkl
+*.joblib
+*.pth
+*.onnx
+
+# DuckDB database files
+*.duckdb
+*.duckdb.wal
+
+# dbt artifacts
+**/dbt_project/target/
+**/dbt_project/logs/
+**/dbt_project/.user.yml
+**/dbt_project/dbt_packages/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
