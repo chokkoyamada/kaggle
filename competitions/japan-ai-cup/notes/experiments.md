@@ -102,3 +102,10 @@
 - interpretation:
   - baseline同等のスコアに復帰（悪化は止まった）。
   - ただし現時点の最高値は引き続き **0.906** で、更新はまだできていない。
+
+## next submission (stepwise pair test)
+- date: 2026-02-12
+- purpose: `det_profile_plus_refund_recency` (LB 0.906) と `det_profile_plus_refund` の差分確認
+- submitted file:
+  - `competitions/japan-ai-cup/predictions/submission_stepwise_det_profile_plus_refund.csv`
+- status: submit failed (`400 Bad Request` from Kaggle API)
