@@ -108,4 +108,4 @@
 - purpose: `det_profile_plus_refund_recency` (LB 0.906) と `det_profile_plus_refund` の差分確認
 - submitted file:
   - `competitions/japan-ai-cup/predictions/submission_stepwise_det_profile_plus_refund.csv`
-- status: submit failed (`400 Bad Request` from Kaggle API)
+- status: submit failed (Kaggle daily submission limit reached on 2026-02-12)
