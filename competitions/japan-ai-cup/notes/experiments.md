@@ -52,3 +52,19 @@
   - RandomCV mean AUC: 0.903126
 - next:
   - submit `submission_v2_tuned1.csv` and compare LB vs 0.903.
+
+## v2 ablation (feature removal)
+- date: 2026-02-12
+- script: `competitions/japan-ai-cup/scripts/ablate_features_v2.py`
+- fixed params: `num_leaves=63, min_child_samples=120, feature_fraction=0.8, lambda_l1=0.1, lambda_l2=1.0`
+- compared settings:
+  - full (49 features): TimeCV mean 0.754780 / OOF 0.874581
+  - no_refund (45 features): TimeCV mean 0.754780 / OOF 0.874581
+  - no_recency_window (35 features): TimeCV mean 0.754908 / OOF 0.875530
+- outputs:
+  - `competitions/japan-ai-cup/notes/ablation_results_v2.csv`
+  - `competitions/japan-ai-cup/predictions/submission_v2_ablation_full.csv`
+  - `competitions/japan-ai-cup/predictions/submission_v2_ablation_no_refund.csv`
+  - `competitions/japan-ai-cup/predictions/submission_v2_ablation_no_recency_window.csv`
+- submission:
+  - submitted `submission_v2_ablation_no_recency_window.csv` (LB pending)
