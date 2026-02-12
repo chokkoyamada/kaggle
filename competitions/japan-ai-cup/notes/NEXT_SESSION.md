@@ -12,6 +12,14 @@
 - `plus_refund` が **0.906**: recencyの有無で同等。次は seed averaging を試す。
 - `plus_refund` が **0.905 以下**: recencyあり版（0.906）を維持して別方向を試す。
 
+## Strategy Shift (small-gap mode)
+- leaderboard gap is small: best 0.906 vs top 0.909 (gap 0.003)
+- prioritize micro-improvements over large redesign:
+  - keep strong baseline family as anchor
+  - one-change-at-a-time validation
+  - emphasize seed averaging / simple ensemble
+  - spend daily submission quota only on top 1-2 candidates
+
 ## Candidate Next Actions
 - A. seed averaging (baseline/stepwise共通)
   - `seed in [42, 2024, 7, 77, 777]` で予測平均
