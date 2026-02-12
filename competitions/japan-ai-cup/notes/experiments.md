@@ -67,4 +67,13 @@
   - `competitions/japan-ai-cup/predictions/submission_v2_ablation_no_refund.csv`
   - `competitions/japan-ai-cup/predictions/submission_v2_ablation_no_recency_window.csv`
 - submission:
-  - submitted `submission_v2_ablation_no_recency_window.csv` (LB pending)
+  - submitted `submission_v2_ablation_no_recency_window.csv` (LB: 0.900)
+
+## LB update (2026-02-12)
+- `submission.csv` (baseline repro): **0.906**
+- `submission_v2.csv`: **0.903**
+- `submission_v2_tuned1.csv`: **0.902**
+- `submission_v2_ablation_no_recency_window.csv`: **0.900**
+- takeaway:
+  - 現時点では v2 系の特徴量/検証改善は Public LB を改善していない。
+  - 直近の基準モデルは `baseline.py` の `0.906`。
