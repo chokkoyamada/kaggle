@@ -95,4 +95,10 @@
   - `submission_stepwise_det_profile_plus_refund.csv`
   - `submission_stepwise_det_profile_plus_refund_recency.csv`
 - submission:
-  - submitted `submission_stepwise_det_profile_plus_refund_recency.csv` (LB pending)
+  - submitted `submission_stepwise_det_profile_plus_refund_recency.csv` (LB: 0.906)
+
+## LB update (2026-02-12, stepwise)
+- `submission_stepwise_det_profile_plus_refund_recency.csv`: **0.906**
+- interpretation:
+  - baseline同等のスコアに復帰（悪化は止まった）。
+  - ただし現時点の最高値は引き続き **0.906** で、更新はまだできていない。
