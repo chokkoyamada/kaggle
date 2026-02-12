@@ -77,3 +77,22 @@
 - takeaway:
   - 現時点では v2 系の特徴量/検証改善は Public LB を改善していない。
   - 直近の基準モデルは `baseline.py` の `0.906`。
+
+## baseline stepwise migration (toward v2)
+- date: 2026-02-12
+- script: `competitions/japan-ai-cup/scripts/baseline_stepwise_migration.py`
+- cv setup: Random Stratified 5-fold (baseline互換)
+- result summary (`competitions/japan-ai-cup/notes/stepwise_migration_results.csv`):
+  - `det_profile_plus_refund_recency`: cv_mean 0.904232 / oof 0.902355 (43 features)
+  - `det_profile_plus_refund`: cv_mean 0.904081 / oof 0.902165 (35 features)
+  - `det_profile_drop_null`: cv_mean 0.903674 / oof 0.902827 (31 features)
+  - `baseline_compat`: cv_mean 0.903615 / oof 0.901378 (31 features)
+  - `det_profile`: cv_mean 0.903118 / oof 0.899911 (31 features)
+- generated submissions:
+  - `submission_stepwise_baseline_compat.csv`
+  - `submission_stepwise_det_profile.csv`
+  - `submission_stepwise_det_profile_drop_null.csv`
+  - `submission_stepwise_det_profile_plus_refund.csv`
+  - `submission_stepwise_det_profile_plus_refund_recency.csv`
+- submission:
+  - submitted `submission_stepwise_det_profile_plus_refund_recency.csv` (LB pending)
